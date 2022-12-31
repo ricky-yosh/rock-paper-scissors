@@ -33,7 +33,7 @@ function playRound(playerSelection, computerSelection) {
     }
     else if (playerSelection == "rock" && computerSelection == "paper")
     {
-        finalReturn = "You Lose! " + computerSelection + " bseats " + playerSelection + ".";
+        finalReturn = "You Lose! " + computerSelection + " beats " + playerSelection + ".";
     }
     else if (playerSelection == "paper" && computerSelection == "scissors")
     {
@@ -50,6 +50,8 @@ function playRound(playerSelection, computerSelection) {
     return finalReturn;
 }
 
-const playerSelection = "rOck";
-const computerSelection  = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+for (let round = 0; round < 5; round++) {
+    const playerSelection = prompt("Rock, paper, or scissors?");
+    const computerSelection  = getComputerChoice();
+    alert(playRound(playerSelection, computerSelection));
+}
