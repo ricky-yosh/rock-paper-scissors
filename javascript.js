@@ -50,13 +50,22 @@ function playRound(playerSelection, computerSelection) {
     return finalReturn;
 }
 
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+}
+
 function main() {
     let round = 1;
+    let playerScore = 0;
+    let computerScore = 0;
     const buttonChoice = document.querySelectorAll("button");
     
     // Iterate through each button
     let playerSelection = "";
     buttonChoice.forEach((button) => { 
+        round++;
         // each button add an event listener for "click"
         button.addEventListener("click", () => {
             // stores players choice and displays it 
@@ -102,7 +111,37 @@ function main() {
             roundCounterContent = document.createElement("div");
             roundCounterContent.textContent = round;
             roundCounterContainer.appendChild(roundCounterContent);
-            round++;
+
+            // update player score
+            if(roundResult[4] == "W")
+            {
+                const playerScoreValue = document.querySelector("#player-score-value");
+                playerScore++;
+                playerScoreValue.textContent = playerScore;
+            }
+            // update computer score
+            if(roundResult[4] == "L")
+            {
+                const computerScoreValue = document.querySelector("#computer-score-value");
+                computerScore++;
+                computerScoreValue.textContent = computerScore;
+            }
+
+            if(playerScore == 5 || computerScore == 5)
+            {
+                const bodyContainer = document.querySelector('body');
+                removeAllChildNodes(bodyContainer);
+                finalWinner = document.createElement("h1");
+                if(computerScore == 5)
+                {
+                    finalWinner.textContent = "Computer Wins!";
+                }
+                if(playerScore == 5)
+                {
+                    finalWinner.textContent = "You Win!";
+                }
+                bodyContainer.appendChild(finalWinner);
+            }
         });
     });
 }   
