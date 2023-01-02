@@ -50,8 +50,45 @@ function playRound(playerSelection, computerSelection) {
     return finalReturn;
 }
 
-for (let round = 0; round < 5; round++) {
-    const playerSelection = prompt("Rock, paper, or scissors?");
-    const computerSelection  = getComputerChoice();
-    alert(playRound(playerSelection, computerSelection));
-}
+function main() {
+    let round = 1;
+    const buttonChoice = document.querySelectorAll("button");
+    
+    // Iterate through each button
+    let playerSelection = "";
+    buttonChoice.forEach((button) => { 
+        // each button add an event listener for "click"
+        button.addEventListener("click", () => {
+            // stores players choice and displays it 
+            playerSelection = button.id;
+            const playerChoiceContainer = document.querySelector("#player-choice");
+            const playerChoiceContent = document.createElement("div");
+            playerChoiceContent.textContent = button.id;
+            playerChoiceContainer.appendChild(playerChoiceContent);
+
+
+            // gets computers choice and displays it
+            const computerSelection  = getComputerChoice();
+            const computerChoiceContainer = document.querySelector("#computer-choice");
+            const computerChoiceContent = document.createElement("div");
+            computerChoiceContent.textContent = computerSelection;
+            computerChoiceContainer.appendChild(computerChoiceContent);
+
+            // gets round result and displays it
+            const roundResult = playRound(playerSelection, computerSelection);
+            const roundResultContainer = document.querySelector("#game-results");
+            const roundResultContent = document.createElement("div");
+            roundResultContent.textContent = roundResult;
+            roundResultContainer.appendChild(roundResultContent);
+
+            // changes round number
+            const roundCounterContainer = document.querySelector("#round-counter");
+            const roundCounterContent = document.createElement("div");
+            roundCounterContent.textContent = round;
+            roundCounterContainer.appendChild(roundCounterContent);
+            round++;
+        });
+    });
+}   
+
+main();
