@@ -62,6 +62,10 @@ function main() {
             // stores players choice and displays it 
             playerSelection = button.id;
             const playerChoiceContainer = document.querySelector("#player-choice");
+            if(round > 1)
+            {
+                playerChoiceContainer.removeChild(playerChoiceContainer.lastChild);
+            }
             const playerChoiceContent = document.createElement("div");
             playerChoiceContent.textContent = button.id;
             playerChoiceContainer.appendChild(playerChoiceContent);
@@ -70,6 +74,10 @@ function main() {
             // gets computers choice and displays it
             const computerSelection  = getComputerChoice();
             const computerChoiceContainer = document.querySelector("#computer-choice");
+            if(round > 1)
+            {
+                computerChoiceContainer.removeChild(computerChoiceContainer.lastChild);
+            }
             const computerChoiceContent = document.createElement("div");
             computerChoiceContent.textContent = computerSelection;
             computerChoiceContainer.appendChild(computerChoiceContent);
@@ -77,13 +85,21 @@ function main() {
             // gets round result and displays it
             const roundResult = playRound(playerSelection, computerSelection);
             const roundResultContainer = document.querySelector("#game-results");
+            if(round > 1)
+            {
+                roundResultContainer.removeChild(roundResultContainer.lastChild);
+            }
             const roundResultContent = document.createElement("div");
             roundResultContent.textContent = roundResult;
             roundResultContainer.appendChild(roundResultContent);
 
             // changes round number
             const roundCounterContainer = document.querySelector("#round-counter");
-            const roundCounterContent = document.createElement("div");
+            if(round > 1)
+            {
+                roundCounterContainer.removeChild(roundCounterContainer.lastChild);
+            }
+            roundCounterContent = document.createElement("div");
             roundCounterContent.textContent = round;
             roundCounterContainer.appendChild(roundCounterContent);
             round++;
